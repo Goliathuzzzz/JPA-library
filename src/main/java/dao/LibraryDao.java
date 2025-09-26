@@ -6,14 +6,17 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class LibraryDao {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("lib");
+    private final EntityManagerFactory emf;
+
+    public LibraryDao() {
+         emf = Persistence.createEntityManagerFactory("lib");
+    }
 
     public void persistStudent(Student student) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(student);
         em.getTransaction().commit();
-        em.close();
         System.out.println("Student persisted:" + student.getName());
     }
 
@@ -22,7 +25,6 @@ public class LibraryDao {
         em.getTransaction().begin();
         em.persist(book);
         em.getTransaction().commit();
-        em.close();
         System.out.println("Book persisted:" + book.getTitle());
     }
 
@@ -31,7 +33,6 @@ public class LibraryDao {
         em.getTransaction().begin();
         em.persist(author);
         em.getTransaction().commit();
-        em.close();
         System.out.println("Author persisted: " + author.getName());
     }
 
@@ -40,7 +41,6 @@ public class LibraryDao {
         em.getTransaction().begin();
         em.persist(biography);
         em.getTransaction().commit();
-        em.close();
         System.out.println("Biography persisted");
     }
 
@@ -49,7 +49,6 @@ public class LibraryDao {
         em.getTransaction().begin();
         em.persist(borrowedBook);
         em.getTransaction().commit();
-        em.close();
         System.out.println("Book borrowed successfully");
     }
 }

@@ -19,6 +19,7 @@ public class Biography {
     public Biography(String details, Author author) {
         this.details = details;
         this.author = author;
+        author.setBiography(this);
     }
 
     public Biography() {}

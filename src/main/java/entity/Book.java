@@ -10,21 +10,13 @@ import java.util.Set;
 public abstract class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "book_gen")
-    @TableGenerator(
-            name = "book_gen",
-            table = "id_generator",
-            pkColumnName = "gen_name",
-            valueColumnName = "gen_value",
-            pkColumnValue = "book_id",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(name = "title", unique = true, nullable = false)
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
     private Author author;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
@@ -33,6 +25,7 @@ public abstract class Book {
     protected Book(String title, Author author) {
         this.title = title;
         this.author = author;
+        author.addBook(this);
     }
 
     protected Book() {
