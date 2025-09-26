@@ -25,8 +25,6 @@ public class BorrowedBook {
         this.student = student;
         this.book = book;
         this.borrowDate = new Date();
-        student.addBorrowedBook(this);
-        book.addBorrowedBook(this);
     }
 
     public BorrowedBook() {}

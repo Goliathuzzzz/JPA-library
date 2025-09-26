@@ -25,7 +25,6 @@ public abstract class Book {
     protected Book(String title, Author author) {
         this.title = title;
         this.author = author;
-        author.addBook(this);
     }
 
     protected Book() {
